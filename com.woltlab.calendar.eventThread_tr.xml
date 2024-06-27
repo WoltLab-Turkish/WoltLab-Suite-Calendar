@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/language.xsd" languagecode="tr" languagename="Turkish" countrycode="tr">
+	<category name="calendar.event">
+		<item name="calendar.event.button.jumpToEventThread"><![CDATA[Tartışma Konusu]]></item>
+		<item name="calendar.event.eventThread.boardID"><![CDATA[Forum]]></item>
+		<item name="calendar.event.eventThread.boardID.description"><![CDATA[Tartışma konuları seçilen forumda oluşturulacaktır.]]></item>
+		<item name="calendar.event.eventThread.info"><![CDATA[{#$eventThread->replies} {if $eventThread->replies == 1}cevap{else}cevaplar{/if}{if $eventThread->replies > 0}, son: {time time=$eventThread->lastPostTime}{/if}]]></item>
+		<item name="calendar.event.eventThread.message"><![CDATA[<p>{$event->username} yeni bir etkinlik oluşturdu:<br>[event]{$event->getFirstEventDate()->eventDateID}[/event]</p>
+<woltlab-quote>{@$event->message}</woltlab-quote>]]></item>
+		<item name="calendar.event.eventThread.subject"><![CDATA[{@$event->subject} ({@$event->getFirstEventDate()->getFormattedTimeFrame($__language, true)})]]></item>
+		<item name="calendar.event.participants.summary"><![CDATA[{#$calendarEventDateParticipation[yes]} katılımcı{if $calendarEventDateParticipation[yes] != 1}lar{/if}, {#$calendarEventDateParticipation[maybe]} kararsız ve {#$calendarEventDateParticipation[no]} katılmayacak]]></item>
+	</category>
+	<category name="wcf.acp.option">
+		<item name="wcf.acp.option.calendar_event_thread_board_id"><![CDATA[Forum]]></item>
+		<item name="wcf.acp.option.calendar_event_thread_board_id.description"><![CDATA[Tartışma konuları seçilen forumda oluşturulacaktır.]]></item>
+		<item name="wcf.acp.option.calendar_event_thread_categories"><![CDATA[Kategoriler]]></item>
+		<item name="wcf.acp.option.calendar_event_thread_categories.description"><![CDATA[Etkinlikler için tartışma konularını yalnızca seçilen kategorilere oluşturun.]]></item>
+		<item name="wcf.acp.option.calendar_event_thread_single_board"><![CDATA[Tüm kategoriler için tek forum]]></item>
+		<item name="wcf.acp.option.calendar_event_thread_single_board.description"><![CDATA[Tartışma konuları belirtilen forumda oluşturulacaktır, seçilen kategorilere bakılmaksızın. Bu özelliği devre dışı bırakarak istediğiniz kategorileri düzenleyebilir ve bunlara belirli bir forum atayabilirsiniz.]]></item>
+		<item name="wcf.acp.option.category.calendar.event.eventThread"><![CDATA[Tartışma Konusu]]></item>
+		<item name="wcf.acp.option.category.calendar.event.eventThread.description"><![CDATA[Her yeni etkinlik için otomatik olarak tartışma konuları seçilen forumda oluşturulur.]]></item>
+	</category>
+</language>
