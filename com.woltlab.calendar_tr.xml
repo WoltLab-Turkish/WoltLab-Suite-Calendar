@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/language.xsd" languagecode="tr" languagename="Türkçe" countrycode="tr">
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/6.0/language.xsd" languagecode="tr" languagename="Türkçe" countrycode="tr">
 	<category name="calendar.acp.event">
 		<item name="calendar.acp.event.option.add"><![CDATA[Seçenek Alanı Ekle]]></item>
 		<item name="calendar.acp.event.option.availability"><![CDATA[Uygunluk]]></item>
-		<item name="calendar.acp.event.option.categoryIDs"><![CDATA[Kategoriler]]></item>
 		<item name="calendar.acp.event.option.categoryIDs.description"><![CDATA[Seçilen kategorilerdeki etkinlikler için seçenek alanı yalnızca bu kategorilerde kullanılabilir. Hiçbir kategori seçilmezse, seçenek alanı tüm kategorilerde kullanılabilir olur. Kaydettikten sonra seçilen kategoriler artık değiştirilemez.]]></item>
 		<item name="calendar.acp.event.option.edit"><![CDATA[Seçenek Alanı Düzenle]]></item>
 		<item name="calendar.acp.event.option.list"><![CDATA[Seçenek Alanları]]></item>
@@ -59,15 +58,12 @@
 		<item name="calendar.event.add"><![CDATA[Etkinlik Oluştur]]></item>
 		<item name="calendar.event.bbcode.type"><![CDATA[Etkinlik]]></item>
 		<item name="calendar.event.button.export"><![CDATA[Etkinliği Dışa Aktar]]></item>
-		<item name="calendar.event.categories"><![CDATA[Kategoriler]]></item>
 		<item name="calendar.event.categorizedEvents"><![CDATA[“{$category->getTitle()}” kategorisindeki etkinlikler]]></item>
-		<item name="calendar.event.category"><![CDATA[Kategori]]></item>
 		<item name="calendar.event.category.error.invalid"><![CDATA[Seçilen kategori geçersiz.]]></item>
 		<item name="calendar.event.comment"><![CDATA[Etkinlik Yorumu]]></item>
 		<item name="calendar.event.commentResponse"><![CDATA[Etkinlik Yorumuna Yanıt]]></item>
 		<item name="calendar.event.comments"><![CDATA[Yorumlar]]></item>
 		<item name="calendar.event.condition.activeUserIsParticipant"><![CDATA[Aktif kullanıcı katılımcı]]></item>
-		<item name="calendar.event.condition.category"><![CDATA[Kategori]]></item>
 		<item name="calendar.event.condition.isFeatured"><![CDATA[Sadece öne çıkan etkinlikler]]></item>
 		<item name="calendar.event.coordinates"><![CDATA[Koordinatlar]]></item>
 		<item name="calendar.event.coordinates.customLocation"><![CDATA[Etkinlik Yeri]]></item>
@@ -93,16 +89,16 @@
 		<item name="calendar.event.date.change.notification.title"><![CDATA[Etkinlik Yeniden Planlandı]]></item>
 		<item name="calendar.event.date.changeTime"><![CDATA[Zamanı Değiştir]]></item>
 		<item name="calendar.event.date.changeTime.info"><![CDATA[Bir etkinlik serisinin bireysel bir etkinliğinin zamanını düzenliyorsunuz. Diğer tüm etkinliklerin zamanı değişmemiştir.]]></item>
-		<item name="calendar.event.date.comment.like.notification.message"><![CDATA[<strong>{$author}</strong>, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki yorumunuza tepki verdi ({$eventDate->getFormattedTimeFrame()}) ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}).]]></item>
-		<item name="calendar.event.date.comment.like.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki yorumunuza tepki verdi ({$eventDate->getFormattedTimeFrame()}) ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}).]]></item>
+		<item name="calendar.event.date.comment.like.notification.message"><![CDATA[<strong>{$author}</strong>, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki yorumunuza ({$eventDate->getFormattedTimeFrame()}) ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}) ile tepki verdi.]]></item>
+		<item name="calendar.event.date.comment.like.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki yorumunuza ({$eventDate->getFormattedTimeFrame()}) ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}) ile tepki verdi.]]></item>
 		<item name="calendar.event.date.comment.like.notification.title"><![CDATA[Yorumunuza Tepki (Etkinlik)]]></item>
 		<item name="calendar.event.date.comment.like.notification.title.stacked"><![CDATA[{#$count} kullanıcı yorumunuza tepki verdi (Etkinlik)]]></item>
 		<item name="calendar.event.date.comment.notification.mail.html"><![CDATA[<p>{@$authorList}, <a href="{$eventDate->getLink()}#comment{@$commentID}">{$eventDate->getTitle()}</a> etkinliğiniz hakkında yorum yaptı ({@$eventDate->getFormattedTimeFrame()}):</p>]]></item>
 		<item name="calendar.event.date.comment.notification.mail.plaintext"><![CDATA[{@$authorList}, “{@$eventDate->getTitle()}” etkinliğiniz hakkında yorum yaptı [URL:{@$eventDate->getLink()}#comment{@$commentID}] ({@$eventDate->getFormattedTimeFrame()}){if $count == 1 && !$guestTimesTriggered}:{else}.{/if}]]></item>
 		<item name="calendar.event.date.comment.notification.message"><![CDATA[{if $author->userID}<strong>{$author}</strong>{else}Bir misafir{/if}, <strong>{$eventDate->getTitle()}</strong> etkinliğiniz hakkında yorum yaptı ({$eventDate->getFormattedTimeFrame()}).]]></item>
 		<item name="calendar.event.date.comment.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$eventDate->getTitle()}</strong> etkinliğiniz hakkında yorum yaptı ({$eventDate->getFormattedTimeFrame()}).]]></item>
-		<item name="calendar.event.date.commentResponse.like.notification.message"><![CDATA[<strong>{$author}</strong>, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki bir yoruma verdiğiniz yanıta tepki verdi ({$eventDate->getFormattedTimeFrame()}) ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}).]]></item>
-		<item name="calendar.event.date.commentResponse.like.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki bir yoruma verdiğiniz yanıta tepki verdi ({$eventDate->getFormattedTimeFrame()}) ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}).]]></item>
+		<item name="calendar.event.date.commentResponse.like.notification.message"><![CDATA[<strong>{$author}</strong>, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki bir yoruma verdiğiniz yanıta ({$eventDate->getFormattedTimeFrame()}) ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}) ile tepki verdi.]]></item>
+		<item name="calendar.event.date.commentResponse.like.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki bir yoruma verdiğiniz yanıta ({$eventDate->getFormattedTimeFrame()}) ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}) ile tepki verdi.]]></item>
 		<item name="calendar.event.date.commentResponse.like.notification.title"><![CDATA[Yorumunuza Yanıtınıza Tepki (Etkinlik)]]></item>
 		<item name="calendar.event.date.commentResponse.like.notification.title.stacked"><![CDATA[{#$count} kullanıcı yorumunuza yanıtınıza tepki verdi (Etkinlik)]]></item>
 		<item name="calendar.event.date.commentResponse.notification.mail.html"><![CDATA[<p>{@$authorList}, <a href="{$eventDate->getLink()}#comment{@$commentID}/response{@$responseID}">{$eventDate->getTitle()}</a> etkinliğinizdeki yorumunuza yanıt verdi ({@$eventDate->getFormattedTimeFrame()}):</p>]]></item>
@@ -267,10 +263,10 @@
 		<item name="calendar.event.participation.maxParticipants.info"><![CDATA[Sadece {$eventDate->getEvent()->maxParticipants - $eventDate->participants} koltuk kaldı]]></item>
 		<item name="calendar.event.pastEvents"><![CDATA[Geçmiş Etkinlikler]]></item>
 		<item name="calendar.event.preset"><![CDATA[Etkinlik <a href="{link application='calendar' controller='Event' object=$presetEvent->getFirstEventDate()}{/link}">{$presetEvent->getTitle()}</a> şablon olarak kullanılıyor, aşağıdaki alanlar önceden doldurulmuştur.]]></item>
-		<item name="calendar.event.recentActivity.event"><![CDATA[{if $event->hasLabels()}<ul class="labelList">{foreach from=$event->getLabels() item=label}<li>{@$label->render()}</li>{/foreach}</ul> {/if}{anchor object=$event->getFirstEventDate() class='calendarEventLink'} ({$event->getFirstEventDate()->getFormattedTimeFrame()}) etkinliği oluşturuldu.]]></item>
-		<item name="calendar.event.recentActivity.eventDateComment"><![CDATA[{if $eventDate->getEvent()->hasLabels()}<ul class="labelList">{foreach from=$eventDate->getEvent()->getLabels() item=label}<li>{@$label->render()}</li>{/foreach}</ul> {/if}<a href="{$eventDate->getLink()}#comment{@$commentID}" class="calendarEventLink" data-object-id="{@$eventDate->eventDateID}">{$eventDate->getTitle()}</a> adlı etkinlik hakkında yorum yapıldı.]]></item>
-		<item name="calendar.event.recentActivity.eventDateCommentResponse"><![CDATA[{if $eventDate->getEvent()->hasLabels()}<ul class="labelList">{foreach from=$eventDate->getEvent()->getLabels() item=label}<li>{@$label->render()}</li>{/foreach}</ul> {/if}<a href="{$eventDate->getLink()}#comment{@$commentID}/response{@$responseID}" class="calendarEventLink" data-object-id="{@$eventDate->eventDateID}">{$eventDate->getTitle()}</a> adlı etkinlikteki, {user object=$commentAuthor} adlı kullanıcının yorumuna yanıt verildi.]]></item>
-		<item name="calendar.event.recentActivity.likedEvent"><![CDATA[{if $event->hasLabels()}<ul class="labelList">{foreach from=$event->getLabels() item=label}<li>{@$label->render()}</li>{/foreach}</ul> {/if}{anchor object=$event->getFirstEventDate() class='calendarEventLink'} adlı etkinliğe <span title="{$reactionType->getTitle()}" class="jsTooltip">{@$reactionType->renderIcon()}</span> ile tepki verildi.]]></item>
+		<item name="calendar.event.recentActivity.event"><![CDATA[<strong>{$author}</strong>, {if $event->hasLabels()}<ul class="labelList">{foreach from=$event->getLabels() item=label}<li>{unsafe:$label->render()}</li>{/foreach}</ul> {/if}<strong>{$event->getTitle()} ({$event->getFirstEventDate()->getFormattedTimeFrame()})</strong> adlı etkinliği oluşturdu.]]></item>
+		<item name="calendar.event.recentActivity.eventDateComment"><![CDATA[<strong>{$author}</strong>, {if $eventDate->getEvent()->hasLabels()}<ul class="labelList">{foreach from=$eventDate->getEvent()->getLabels() item=label}<li>{unsafe:$label->render()}</li>{/foreach}</ul> {/if}<strong>{$eventDate->getTitle()}</strong> adlı etkinlik hakkında yorum yapıldı.]]></item>
+		<item name="calendar.event.recentActivity.eventDateCommentResponse"><![CDATA[<strong>{$author}</strong>, {if $eventDate->getEvent()->hasLabels()}<ul class="labelList">{foreach from=$eventDate->getEvent()->getLabels() item=label}<li>{unsafe:$label->render()}</li>{/foreach}</ul> {/if}<strong>{$eventDate->getTitle()}</strong> adlı etkinlikteki, <strong>{$commentAuthor}</strong> adlı kullanıcının yorumuna yanıt verildi.]]></item>
+		<item name="calendar.event.recentActivity.likedEvent"><![CDATA[<strong>{$author}</strong>, {if $event->hasLabels()}<ul class="labelList">{foreach from=$event->getLabels() item=label}<li>{unsafe:$label->render()}</li>{/foreach}</ul> {/if}<strong>{$event->getTitle()}</strong> adlı etkinliğe <span title="{$reactionType->getTitle()}" class="jsTooltip">{unsafe:$reactionType->renderIcon()}</span> ile tepki verildi.]]></item>
 		<item name="calendar.event.restore"><![CDATA[Geri Yükle]]></item>
 		<item name="calendar.event.searchEvents"><![CDATA[Etkinlikleri Ara]]></item>
 		<item name="calendar.event.setAsFeatured"><![CDATA[Öne Çıkar]]></item>
@@ -291,11 +287,11 @@
 		<item name="calendar.event.weeklyView"><![CDATA[Hafta Görünümü]]></item>
 		<item name="calendar.event.yearlyView"><![CDATA[Yıl Görünümü]]></item>
 	</category>
-		<category name="calendar.index">
+	<category name="calendar.index">
 		<item name="calendar.index.stats"><![CDATA[İstatistikler]]></item>
 		<item name="calendar.index.stats.detail"><![CDATA[<ul class="inlineList dotSeparated">
 <li>{#$stats[authors]} Yazar{if $stats[authors] != 1}lar{/if}</li>
-<li>{#$stats[events]} Etkinlik ({#$stats[eventsPerDay]} Günde {#$stats[eventsPerDay]} Etkinlik)</li>
+<li>{#$stats[events]} Etkinlik{if $stats[events] != 1}ler{/if} ({#$stats[eventsPerDay]} Etkinlik{if $stats[eventsPerDay] != 1}s{/if} Günde)</li>
 <li>{#$stats[comments]} Yorum{if $stats[comments] != 1}lar{/if}</li>
 </ul>]]></item>
 	</category>
