@@ -6,11 +6,13 @@
 		<item name="calendar.acp.event.option.categoryIDs.description"><![CDATA[Seçilen kategorilerdeki etkinlikler için seçenek alanı yalnızca bu kategorilerde kullanılabilir. Hiçbir kategori seçilmezse, seçenek alanı tüm kategorilerde kullanılabilir olur. Kaydettikten sonra seçilen kategoriler artık değiştirilemez.]]></item>
 		<item name="calendar.acp.event.option.edit"><![CDATA[Seçenek Alanı Düzenle]]></item>
 		<item name="calendar.acp.event.option.list"><![CDATA[Seçenek Alanları]]></item>
+		<item name="calendar.acp.event.option.typeData"><![CDATA[Özellikler]]></item>
 	</category>
 	<category name="calendar.acp.eventImport">
 		<item name="calendar.acp.eventImport.add"><![CDATA[Etkinlik İçeriği Ekle]]></item>
 		<item name="calendar.acp.eventImport.category.description"><![CDATA[Etkinlikler seçilen kategoride oluşturulacaktır.]]></item>
 		<item name="calendar.acp.eventImport.description"><![CDATA[Harici takvimler periyodik olarak alınır ve yeni içerik etkinlik olarak yayınlanır.]]></item>
+		<item name="calendar.acp.eventImport.disable"><![CDATA[Etkinlik İçe Aktarmayı Devre Dışı Bırak]]></item>
 		<item name="calendar.acp.eventImport.edit"><![CDATA[Etkinlik İçeriğini Düzenle]]></item>
 		<item name="calendar.acp.eventImport.error.noCategories"><![CDATA[Lütfen etkinlik içeriği oluşturmadan önce <a href="{link controller='CategoryAdd' application='calendar'}{/link}">bir kategori ekleyin</a>.]]></item>
 		<item name="calendar.acp.eventImport.errorMessage"><![CDATA[Geçerli çalışma sırasında bir hata oluştu.]]></item>
@@ -63,12 +65,11 @@
 		<item name="calendar.event.comment"><![CDATA[Etkinlik Yorumu]]></item>
 		<item name="calendar.event.commentResponse"><![CDATA[Etkinlik Yorumuna Yanıt]]></item>
 		<item name="calendar.event.comments"><![CDATA[Yorumlar]]></item>
-		<item name="calendar.event.condition.activeUserIsParticipant"><![CDATA[Aktif kullanıcı katılımcı]]></item>
-		<item name="calendar.event.condition.isFeatured"><![CDATA[Sadece öne çıkan etkinlikler]]></item>
+		<item name="calendar.event.condition.activeUserIsParticipant"><![CDATA[Aktif kullanıcı katılımcıdır]]></item>
+		<item name="calendar.event.condition.isFeatured"><![CDATA[Yalnızca öne çıkan etkinlikler]]></item>
 		<item name="calendar.event.coordinates"><![CDATA[Koordinatlar]]></item>
-		<item name="calendar.event.coordinates.customLocation"><![CDATA[Etkinlik Yeri]]></item>
-		<item name="calendar.event.coordinates.description"><![CDATA[Bu etkinlik için bir konum belirtebilirsiniz.]]></item>
-		<item name="calendar.event.coordinates.enable"><![CDATA[Etkinlik Yeri Belirt]]></item>
+		<item name="calendar.event.coordinates.customLocation"><![CDATA[Etkinlik Konumu]]></item>
+		<item name="calendar.event.coordinates.enable"><![CDATA[Etkinlik Konumunu Belirt]]></item>
 		<item name="calendar.event.coordinates.location"><![CDATA[Konum]]></item>
 		<item name="calendar.event.coordinates.location.description"><![CDATA[Konumu yazın ve önerilerden birini seçin.]]></item>
 		<item name="calendar.event.coordinates.map.enable"><![CDATA[Haritayı Etkinleştir]]></item>
@@ -78,109 +79,111 @@
 		<item name="calendar.event.date.cancel.confirmMessage"><![CDATA[Bu tarihi gerçekten iptal etmek istiyor musunuz? Bu işlem geri alınamaz!]]></item>
 		<item name="calendar.event.date.cancel.reason"><![CDATA[Neden (isteğe bağlı)]]></item>
 		<item name="calendar.event.date.canceled"><![CDATA[Tarih iptal edildi]]></item>
-		<item name="calendar.event.date.canceled.detail"><![CDATA[Bu tarih {if $eventDate->canceledByUsername} {if $eventDate->canceledByUserID}<a href="{link controller='User' id=$eventDate->canceledByUserID title=$eventDate->canceledByUsername}{/link}" class="userLink" data-user-id="{@$eventDate->canceledByUserID}">{$eventDate->canceledByUsername}</a>{else}{$eventDate->canceledByUsername}{/if} tarafından {/if} {@$eventDate->cancelTime|plainTime}{if $eventDate->cancelReason} için: {$eventDate->cancelReason}{/if} iptal edildi.]]></item>
-		<item name="calendar.event.date.canceled.notification.mail.html"><![CDATA[<p><a href="{$eventDate->getLink()}">{$eventDate->getTitle()}</a> adlı etkinlik <strong>{$author}</strong> tarafından {@$eventDate->getFormattedStartTime()} tarihinde iptal edildi{if $eventDate->cancelReason}: {$eventDate->cancelReason}{/if}.</p>]]></item>
-		<item name="calendar.event.date.canceled.notification.mail.plaintext"><![CDATA[“{@$eventDate->getTitle()}” adlı etkinlik [URL:{@$eventDate->getLink()}] <strong>{$author}</strong> tarafından {@$eventDate->getFormattedStartTime()} tarihinde iptal edildi{if $eventDate->cancelReason}: {@$eventDate->cancelReason}{/if}]]></item>
-		<item name="calendar.event.date.canceled.notification.message"><![CDATA[<strong>{$eventDate->getTitle()}</strong> adlı etkinlik {@$eventDate->getFormattedStartTime()} tarihinde iptal edildi{if $eventDate->cancelReason}: {$eventDate->cancelReason}{/if}.]]></item>
+		<item name="calendar.event.date.canceled.detail"><![CDATA[Bu tarih {@$eventDate->cancelTime|plainTime} tarihinde{if $eventDate->canceledByUsername} {if $eventDate->canceledByUserID}<a href="{link controller='User' id=$eventDate->canceledByUserID title=$eventDate->canceledByUsername}{/link}" class="userLink" data-object-id="{$eventDate->canceledByUserID}">{$eventDate->canceledByUsername}</a>{else}{$eventDate->canceledByUsername}{/if} tarafından{/if}{if $eventDate->cancelReason} şu nedenle iptal edildi: {$eventDate->cancelReason}{/if}.]]></item>
+		<item name="calendar.event.date.canceled.notification.mail.html"><![CDATA[<p><strong>{$author}</strong> tarafından oluşturulan <a href="{$eventDate->getLink()}">{$eventDate->getTitle()}</a> etkinliği {@$eventDate->getFormattedStartTime()} tarihinde iptal edildi{if $eventDate->cancelReason}. İptal nedeni: {$eventDate->cancelReason}{/if}.</p>]]></item>
+		<item name="calendar.event.date.canceled.notification.mail.plaintext"><![CDATA[“{@$eventDate->getTitle()}” etkinliği [URL:{@$eventDate->getLink()}], {@$author} tarafından {@$eventDate->getFormattedStartTime()} tarihinde iptal edildi{if $eventDate->cancelReason}. İptal nedeni: {@$eventDate->cancelReason}{/if}.]]></item>
+		<item name="calendar.event.date.canceled.notification.message"><![CDATA[<strong>{$eventDate->getTitle()}</strong> etkinliği {@$eventDate->getFormattedStartTime()} tarihinde iptal edildi{if $eventDate->cancelReason}. İptal nedeni: {$eventDate->cancelReason}{/if}.]]></item>
 		<item name="calendar.event.date.canceled.notification.title"><![CDATA[Etkinlik İptal Edildi]]></item>
-		<item name="calendar.event.date.change.notification.mail.html"><![CDATA[<p><a href="{$eventDate->getLink()}">{$eventDate->getTitle()}</a> adlı etkinlik <strong>{$author}</strong> tarafından {@$eventDate->getFormattedTimeFrame()} tarihine yeniden planlandı.</p>]]></item>
-		<item name="calendar.event.date.change.notification.mail.plaintext"><![CDATA[“{@$eventDate->getTitle()}” adlı etkinlik [URL:{@$eventDate->getLink()}] <strong>{$author}</strong> tarafından {@$eventDate->getFormattedTimeFrame()} tarihine yeniden planlandı]]></item>
-		<item name="calendar.event.date.change.notification.message"><![CDATA[<strong>{$eventDate->getTitle()}</strong> adlı etkinlik {@$eventDate->getFormattedTimeFrame()} tarihine yeniden planlandı.]]></item>
+		<item name="calendar.event.date.change.notification.mail.html"><![CDATA[<p><strong>{$author}</strong> tarafından oluşturulan <a href="{$eventDate->getLink()}">{$eventDate->getTitle()}</a> etkinliği şu tarihe yeniden planlandı: {@$eventDate->getFormattedTimeFrame()}</p>]]></item>
+		<item name="calendar.event.date.change.notification.mail.plaintext"><![CDATA[“{@$eventDate->getTitle()}” etkinliği [URL:{@$eventDate->getLink()}], {@$author} tarafından şu tarihe yeniden planlandı: {@$eventDate->getFormattedTimeFrame()}]]></item>
+		<item name="calendar.event.date.change.notification.message"><![CDATA[<strong>{$eventDate->getTitle()}</strong> etkinliği şu tarihe yeniden planlandı: {@$eventDate->getFormattedTimeFrame()}]]></item>
 		<item name="calendar.event.date.change.notification.title"><![CDATA[Etkinlik Yeniden Planlandı]]></item>
-		<item name="calendar.event.date.changeTime"><![CDATA[Zamanı Değiştir]]></item>
-		<item name="calendar.event.date.changeTime.info"><![CDATA[Bir etkinlik serisinin bireysel bir etkinliğinin zamanını düzenliyorsunuz. Diğer tüm etkinliklerin zamanı değişmemiştir.]]></item>
-		<item name="calendar.event.date.comment.like.notification.message"><![CDATA[<strong>{$author}</strong>, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki yorumunuza ({$eventDate->getFormattedTimeFrame()}) ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}) ile tepki verdi.]]></item>
-		<item name="calendar.event.date.comment.like.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki yorumunuza ({$eventDate->getFormattedTimeFrame()}) ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}) ile tepki verdi.]]></item>
+		<item name="calendar.event.date.changeTime"><![CDATA[Saati Değiştir]]></item>
+		<item name="calendar.event.date.changeTime.info"><![CDATA[Bir etkinlik serisindeki tekil bir etkinliğin saatini düzenliyorsunuz. Diğer tüm etkinliklerin saatleri değişmeyecektir.]]></item>
+		<item name="calendar.event.date.comment.like.notification.message"><![CDATA[<strong>{$author}</strong>, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki yorumunuza ({$eventDate->getFormattedTimeFrame()}) {unsafe:$reaction->renderIcon()} ile tepki verdi.]]></item>
+		<item name="calendar.event.date.comment.like.notification.message.stacked"><![CDATA[{unsafe:$authorList}, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki yorumunuza ({$eventDate->getFormattedTimeFrame()}){if $reaction} {unsafe:$reaction->renderIcon()} ile{/if} tepki verdi.]]></item>
 		<item name="calendar.event.date.comment.like.notification.title"><![CDATA[Yorumunuza Tepki (Etkinlik)]]></item>
 		<item name="calendar.event.date.comment.like.notification.title.stacked"><![CDATA[{#$count} kullanıcı yorumunuza tepki verdi (Etkinlik)]]></item>
-		<item name="calendar.event.date.comment.notification.mail.html"><![CDATA[<p>{@$authorList}, <a href="{$eventDate->getLink()}#comment{@$commentID}">{$eventDate->getTitle()}</a> etkinliğiniz hakkında yorum yaptı ({@$eventDate->getFormattedTimeFrame()}):</p>]]></item>
-		<item name="calendar.event.date.comment.notification.mail.plaintext"><![CDATA[{@$authorList}, “{@$eventDate->getTitle()}” etkinliğiniz hakkında yorum yaptı [URL:{@$eventDate->getLink()}#comment{@$commentID}] ({@$eventDate->getFormattedTimeFrame()}){if $count == 1 && !$guestTimesTriggered}:{else}.{/if}]]></item>
-		<item name="calendar.event.date.comment.notification.message"><![CDATA[{if $author->userID}<strong>{$author}</strong>{else}Bir misafir{/if}, <strong>{$eventDate->getTitle()}</strong> etkinliğiniz hakkında yorum yaptı ({$eventDate->getFormattedTimeFrame()}).]]></item>
-		<item name="calendar.event.date.comment.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$eventDate->getTitle()}</strong> etkinliğiniz hakkında yorum yaptı ({$eventDate->getFormattedTimeFrame()}).]]></item>
-		<item name="calendar.event.date.commentResponse.like.notification.message"><![CDATA[<strong>{$author}</strong>, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki bir yoruma verdiğiniz yanıta ({$eventDate->getFormattedTimeFrame()}) ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}) ile tepki verdi.]]></item>
-		<item name="calendar.event.date.commentResponse.like.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki bir yoruma verdiğiniz yanıta ({$eventDate->getFormattedTimeFrame()}) ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}) ile tepki verdi.]]></item>
-		<item name="calendar.event.date.commentResponse.like.notification.title"><![CDATA[Yorumunuza Yanıtınıza Tepki (Etkinlik)]]></item>
-		<item name="calendar.event.date.commentResponse.like.notification.title.stacked"><![CDATA[{#$count} kullanıcı yorumunuza yanıtınıza tepki verdi (Etkinlik)]]></item>
-		<item name="calendar.event.date.commentResponse.notification.mail.html"><![CDATA[<p>{@$authorList}, <a href="{$eventDate->getLink()}#comment{@$commentID}/response{@$responseID}">{$eventDate->getTitle()}</a> etkinliğinizdeki yorumunuza yanıt verdi ({@$eventDate->getFormattedTimeFrame()}):</p>]]></item>
-		<item name="calendar.event.date.commentResponse.notification.mail.plaintext"><![CDATA[{@$authorList}, “{@$eventDate->getTitle()}” etkinliğinizdeki yorumunuza yanıt verdi [URL:{@$eventDate->getLink()}#comment{@$commentID}/response{@$responseID}] ({@$eventDate->getFormattedTimeFrame()}){if $count == 1 && !$guestTimesTriggered}:{else}.{/if}]]></item>
-		<item name="calendar.event.date.commentResponse.notification.message"><![CDATA[{if $author->userID}<strong>{$author}</strong>{else}Bir misafir{/if}, <strong>{$eventDate->getTitle()}</strong> etkinliğinizdeki yorumunuza yanıt verdi ({$eventDate->getFormattedTimeFrame()}).]]></item>
-		<item name="calendar.event.date.commentResponse.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$eventDate->getTitle()}</strong> etkinliğinizdeki yorumunuza yanıt verdi ({$eventDate->getFormattedTimeFrame()}).]]></item>
-		<item name="calendar.event.date.commentResponseOwner.notification.mail.html"><![CDATA[<p>{@$authorList}, {$commentAuthor}’ın <a href="{$eventDate->getLink()}#comment{@$commentID}/response{@$responseID}">{$eventDate->getTitle()}</a> etkinliğinizdeki yorumuna yanıt verdi ({@$eventDate->getFormattedTimeFrame()}):</p>]]></item>
-		<item name="calendar.event.date.commentResponseOwner.notification.mail.plaintext"><![CDATA[{@$authorList}, {@$commentAuthor}’ın “{@$eventDate->getTitle()}” etkinliğinizdeki yorumuna yanıt verdi [URL:{@$eventDate->getLink()}#comment{@$commentID}/response{@$responseID}] ({@$eventDate->getFormattedTimeFrame()}){if $count == 1 && !$guestTimesTriggered}:{else}.{/if}]]></item>
-		<item name="calendar.event.date.commentResponseOwner.notification.message"><![CDATA[{if $author->userID}<strong>{$author}</strong>{else}Bir misafir{/if}, <strong>{$commentAuthor}</strong>’ın <strong>{$eventDate->getTitle()}</strong> etkinliğinizdeki yorumuna yanıt verdi ({$eventDate->getFormattedTimeFrame()}).]]></item>
-		<item name="calendar.event.date.commentResponseOwner.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$author}</strong>’ın <strong>{$eventDate->getTitle()}</strong> etkinliğinizdeki yorumuna yanıt verdi ({$eventDate->getFormattedTimeFrame()}).]]></item>
+		<item name="calendar.event.date.comment.notification.mail.html"><![CDATA[<p>{@$authorList}, <a href="{$eventDate->getLink()}#comment{@$commentID}">{$eventDate->getTitle()}</a> etkinliğinize ({@$eventDate->getFormattedTimeFrame()}) yorum yaptı:</p>]]></item>
+		<item name="calendar.event.date.comment.notification.mail.plaintext"><![CDATA[{@$authorList}, “{@$eventDate->getTitle()}” etkinliğinize [URL:{@$eventDate->getLink()}#comment{@$commentID}] ({@$eventDate->getFormattedTimeFrame()}) yorum yaptı{if $count == 1 && !$guestTimesTriggered}:{else}.{/if}]]></item>
+		<item name="calendar.event.date.comment.notification.message"><![CDATA[{if $author->userID}<strong>{$author}</strong>{else}Bir misafir{/if}, <strong>{$eventDate->getTitle()}</strong> etkinliğinize ({$eventDate->getFormattedTimeFrame()}) yorum yaptı.]]></item>
+		<item name="calendar.event.date.comment.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$eventDate->getTitle()}</strong> etkinliğinize ({$eventDate->getFormattedTimeFrame()}) yorum yaptı.]]></item>
+		<item name="calendar.event.date.commentResponse.like.notification.message"><![CDATA[<strong>{$author}</strong>, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki bir yoruma verdiğiniz yanıta {unsafe:$reaction->renderIcon()} ile tepki verdi ({$eventDate->getFormattedTimeFrame()}).]]></item>
+		<item name="calendar.event.date.commentResponse.like.notification.message.stacked"><![CDATA[{unsafe:$authorList}, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki bir yoruma verdiğiniz yanıta ({$eventDate->getFormattedTimeFrame()}){if $reaction} {unsafe:$reaction->renderIcon()} ile{/if} tepki verdi.]]></item>
+		<item name="calendar.event.date.commentResponse.like.notification.title"><![CDATA[Yanıtınıza Tepki (Etkinlik)]]></item>
+		<item name="calendar.event.date.commentResponse.like.notification.title.stacked"><![CDATA[{#$count} kullanıcı yanıtınıza tepki verdi (Etkinlik)]]></item>
+		<item name="calendar.event.date.commentResponse.notification.mail.html"><![CDATA[<p>{@$authorList}, <a href="{$eventDate->getLink()}#comment{@$commentID}/response{@$responseID}">{$eventDate->getTitle()}</a> etkinliğindeki yorumunuza ({@$eventDate->getFormattedTimeFrame()}) yanıt verdi:</p>]]></item>
+		<item name="calendar.event.date.commentResponse.notification.mail.plaintext"><![CDATA[{@$authorList}, “{@$eventDate->getTitle()}” etkinliğindeki yorumunuza [URL:{@$eventDate->getLink()}#comment{@$commentID}/response{@$responseID}] ({@$eventDate->getFormattedTimeFrame()}) yanıt verdi{if $count == 1 && !$guestTimesTriggered}:{else}.{/if}]]></item>
+		<item name="calendar.event.date.commentResponse.notification.message"><![CDATA[{if $author->userID}<strong>{$author}</strong>{else}Bir misafir{/if}, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki yorumunuza ({$eventDate->getFormattedTimeFrame()}) yanıt verdi.]]></item>
+		<item name="calendar.event.date.commentResponse.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$eventDate->getTitle()}</strong> etkinliğindeki yorumunuza ({$eventDate->getFormattedTimeFrame()}) yanıt verdi.]]></item>
+		<item name="calendar.event.date.commentResponseOwner.notification.mail.html"><![CDATA[<p>{@$authorList}, <a href="{$eventDate->getLink()}#comment{@$commentID}/response{@$responseID}">{$eventDate->getTitle()}</a> etkinliğinizdeki <strong>{$commentAuthor}</strong> adlı kullanıcının yorumuna ({@$eventDate->getFormattedTimeFrame()}) yanıt verdi:</p>]]></item>
+		<item name="calendar.event.date.commentResponseOwner.notification.mail.plaintext"><![CDATA[{@$authorList}, “{@$eventDate->getTitle()}” etkinliğinizdeki {@$commentAuthor} adlı kullanıcının yorumuna [URL:{@$eventDate->getLink()}#comment{@$commentID}/response{@$responseID}] ({@$eventDate->getFormattedTimeFrame()}) yanıt verdi{if $count == 1 && !$guestTimesTriggered}:{else}.{/if}]]></item>
+		<item name="calendar.event.date.commentResponseOwner.notification.message"><![CDATA[{if $author->userID}<strong>{$author}</strong>{else}Bir misafir{/if}, <strong>{$commentAuthor}</strong> adlı kullanıcının yorumuna <strong>{$eventDate->getTitle()}</strong> etkinliğinizde ({$eventDate->getFormattedTimeFrame()}) yanıt verdi.]]></item>
+		<item name="calendar.event.date.commentResponseOwner.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, <strong>{$author}</strong> adlı kullanıcının yorumuna <strong>{$eventDate->getTitle()}</strong> etkinliğinizde ({$eventDate->getFormattedTimeFrame()}) yanıt verdi.]]></item>
 		<item name="calendar.event.date.end"><![CDATA[Bitiş]]></item>
-		<item name="calendar.event.date.end.error.endsAfterNextEventDate"><![CDATA[Bu etkinliğin tekrarı, bir sonraki tekrarın başlangıcından sonra bitirilemez.]]></item>
-		<item name="calendar.event.date.end.error.invalid"><![CDATA[Girdiğiniz bitiş tarihi geçersiz. Başlangıç tarihinden sonra olmalıdır.]]></item>
-		<item name="calendar.event.date.end.error.tooLong"><![CDATA[Etkinliğiniz maksimum süre olan {#CALENDAR_MAX_EVENT_LENGTH} ardışık gün boyunca gerçekleştirilebilir.]]></item>
+		<item name="calendar.event.date.end.error.endsAfterNextEventDate"><![CDATA[Bu etkinlik tekrarı, bir sonraki tekrarın başlangıcından sonra bitemez.]]></item>
+		<item name="calendar.event.date.end.error.invalid"><![CDATA[Girilen bitiş tarihi geçersizdir. Başlangıç tarihinden sonra olmalıdır.]]></item>
+		<item name="calendar.event.date.end.error.tooLong"><![CDATA[Etkinliğiniz izin verilen azami süreyi aştı; bir etkinlik en fazla {#CALENDAR_MAX_EVENT_LENGTH} ardışık gün sürebilir.]]></item>
 		<item name="calendar.event.date.end.local"><![CDATA[Bitiş (Yerel Saat)]]></item>
-		<item name="calendar.event.date.invite.notification.mail.html"><![CDATA[<p><strong>{$author}</strong>, sizi <a href="{$eventDate->getLink()}">{$eventDate->getTitle()}</a> etkinliğine davet etti ({@$eventDate->getFormattedTimeFrame()}):</p>]]></item>
+		<item name="calendar.event.date.invite.notification.mail.html"><![CDATA[<p><strong>{$author}</strong> sizi <a href="{$eventDate->getLink()}">{$eventDate->getTitle()}</a> etkinliğine davet etti ({@$eventDate->getFormattedTimeFrame()}):</p>]]></item>
 		<item name="calendar.event.date.invite.notification.mail.plaintext"><![CDATA[{@$author}, sizi “{@$eventDate->getTitle()}” etkinliğine davet etti [URL:{@$eventDate->getLink()}] ({@$eventDate->getFormattedTimeFrame()}):]]></item>
-		<item name="calendar.event.date.invite.notification.message"><![CDATA[<strong>{$author}</strong>, sizi <strong>{$eventDate->getTitle()}</strong> etkinliğine ({@$eventDate->getFormattedTimeFrame()}) davet etti.]]></item>
+		<item name="calendar.event.date.invite.notification.message"><![CDATA[<strong>{$author}</strong> sizi <strong>{$eventDate->getTitle()}</strong> etkinliğine davet etti ({$eventDate->getFormattedTimeFrame()}).]]></item>
 		<item name="calendar.event.date.invite.notification.title"><![CDATA[Etkinlik Daveti]]></item>
-		<item name="calendar.event.date.isFullDay"><![CDATA[Tüm gün]]></item>
+		<item name="calendar.event.date.isFullDay"><![CDATA[Tüm Gün]]></item>
 		<item name="calendar.event.date.isParticipant"><![CDATA[Bu etkinliğe katılıyorsunuz.]]></item>
-		<item name="calendar.event.date.isParticipant.invited"><![CDATA[Bu etkinliğe katılmak için davet edildiniz.]]></item>
-		<item name="calendar.event.date.isParticipant.maybe"><![CDATA[Bu etkinliğe tam olarak katılmaya karar vermediniz.]]></item>
+		<item name="calendar.event.date.isParticipant.invited"><![CDATA[Bu etkinliğe katılmanız için davet edildiniz.]]></item>
+		<item name="calendar.event.date.isParticipant.maybe"><![CDATA[Bu etkinliğe katılımınız henüz kesinleşmedi.]]></item>
 		<item name="calendar.event.date.isParticipant.no"><![CDATA[Bu etkinliğe katılmayı reddettiniz.]]></item>
 		<item name="calendar.event.date.local"><![CDATA[Yerel Saat]]></item>
 		<item name="calendar.event.date.next"><![CDATA[Sonraki Tekrar]]></item>
-		<item name="calendar.event.date.notification.mail.html"><![CDATA[<p><a href="{$eventDate->getLink()}">{$eventDate->getTitle()}</a> etkinliği, <strong>{$author}</strong> tarafından {if $eventDate->startTime < TIME_NOW}başladı{else}başlıyor{/if} ({dateInterval end=$eventDate->startTime full=true format='sentence'}):</p>]]></item>
-		<item name="calendar.event.date.notification.mail.plaintext"><![CDATA[“{@$eventDate->getTitle()}” etkinliği, {@$author} tarafından {if $eventDate->startTime < TIME_NOW}başladı{else}başlıyor{/if} ({dateInterval end=$eventDate->startTime full=true format='sentence'}):]]></item>
-		<item name="calendar.event.date.notification.message"><![CDATA[<strong>{$eventDate->getTitle()}</strong> etkinliği, {if $eventDate->startTime < TIME_NOW}başladı{else}başlıyor{/if} ({dateInterval end=$eventDate->startTime full=true format='sentence'}).]]></item>
-		<item name="calendar.event.date.notification.title"><![CDATA[Etkinlik Hatırlatması]]></item>
-		<item name="calendar.event.date.overlapping"><![CDATA[Bu etkinlikler bu dönemde gerçekleşiyor:]]></item>
+		<item name="calendar.event.date.notification.mail.html"><![CDATA[<p><strong>{$author}</strong> tarafından oluşturulan <a href="{$eventDate->getLink()}">{$eventDate->getTitle()}</a> etkinliği {if $eventDate->startTime < TIME_NOW}başladı{else}başlayacak{/if} {dateInterval end=$eventDate->startTime full=true format='sentence'}:</p>]]></item>
+		<item name="calendar.event.date.notification.mail.plaintext"><![CDATA[“{@$eventDate->getTitle()}” etkinliği [URL:{@$eventDate->getLink()}], {@$author} tarafından {if $eventDate->startTime < TIME_NOW}başladı{else}başlayacak{/if} {dateInterval end=$eventDate->startTime full=true format='sentence'}:]]></item>
+		<item name="calendar.event.date.notification.message"><![CDATA[<strong>{$eventDate->getTitle()}</strong> etkinliği {if $eventDate->startTime < TIME_NOW}başladı{else}başlayacak{/if} {dateInterval end=$eventDate->startTime full=true format='sentence'}.]]></item>
+		<item name="calendar.event.date.notification.title"><![CDATA[Etkinlik Hatırlatıcısı]]></item>
+		<item name="calendar.event.date.overlapping"><![CDATA[Bu zaman aralığında gerçekleşen etkinlikler:]]></item>
 		<item name="calendar.event.date.participation"><![CDATA[Katılımı Yönet]]></item>
-		<item name="calendar.event.date.participation.companions"><![CDATA[Arkadaşlar]]></item>
-		<item name="calendar.event.date.participation.companions.error.exceededMaxCompanions"><![CDATA[En fazla arkadaş sayısını aştınız.]]></item>
+		<item name="calendar.event.date.participation.companions"><![CDATA[Eşlikçiler]]></item>
+		<item name="calendar.event.date.participation.companions.error.exceededMaxCompanions"><![CDATA[Azami eşlikçi sayısını aştınız.]]></item>
 		<item name="calendar.event.date.participation.decision"><![CDATA[Katılım]]></item>
 		<item name="calendar.event.date.participation.decision.maybe"><![CDATA[Belki]]></item>
 		<item name="calendar.event.date.participation.decision.no"><![CDATA[Hayır]]></item>
 		<item name="calendar.event.date.participation.decision.yes"><![CDATA[Evet{if !$canParticipate} (mümkün değil){/if}]]></item>
 		<item name="calendar.event.date.participation.invite"><![CDATA[Davet Et]]></item>
-		<item name="calendar.event.date.participation.invite.description"><![CDATA[Bu etkinliğe ek kullanıcıları davet edebilirsiniz. Birden fazla kullanıcıyı virgülle ayırarak belirtebilirsiniz.]]></item>
-		<item name="calendar.event.date.participation.invite.errors"><![CDATA[{if $errors[unknown]|count}Aşağıdaki kullanıcılar bilinmiyor: {implode from=$errors[unknown] item=user}{$user}{/implode}.{/if}{if $errors[unknown]|count && $errors[participant]|count}<br />{/if}{if $errors[participant]|count}Aşağıdaki kullanıcılar zaten katılımcı: {implode from=$errors[participant] item=user}{$user}{/implode}.{/if}]]></item>
+		<item name="calendar.event.date.participation.invite.description"><![CDATA[Bu etkinliğe ek kullanıcılar davet edebilirsiniz. Birden fazla kullanıcıyı virgülle ayırarak girin.]]></item>
+		<item name="calendar.event.date.participation.invite.errors"><![CDATA[{if $errors[unknown]|count}Şu kullanıcılar bilinmiyor: {implode from=$errors[unknown] item=user}{$user}{/implode}.{/if}{if $errors[unknown]|count && $errors[participant]|count}<br />{/if}{if $errors[participant]|count}Şu kullanıcılar zaten katılımcı: {implode from=$errors[participant] item=user}{$user}{/implode}.{/if}]]></item>
 		<item name="calendar.event.date.participation.inviteUserGroup"><![CDATA[Kullanıcı Grubunu Davet Et]]></item>
-		<item name="calendar.event.date.participation.inviteUserGroup.description"><![CDATA[En fazla {#CALENDAR_EVENT_INVITE_GROUP_MAX_SIZE} üye içeren kullanıcı gruplarını davet edebilirsiniz.]]></item>
+		<item name="calendar.event.date.participation.inviteUserGroup.description"><![CDATA[Yalnızca en fazla {#CALENDAR_EVENT_INVITE_GROUP_MAX_SIZE} üyesi olan kullanıcı gruplarını davet edebilirsiniz.]]></item>
 		<item name="calendar.event.date.participation.inviteUsers"><![CDATA[Kullanıcıları Davet Et]]></item>
-		<item name="calendar.event.date.participation.inviteUsers.error.notFound"><![CDATA[Aşağıdaki kullanıcılar bulunamadı: {implode from=$unknownUsers item=unknownUser}{$unknownUser}{/implode}]]></item>
+		<item name="calendar.event.date.participation.inviteUsers.error.notFound"><![CDATA[Şu kullanıcılar bulunamadı: {implode from=$unknownUsers item=unknownUser}{$unknownUser}{/implode}]]></item>
 		<item name="calendar.event.date.participation.message"><![CDATA[Yorum]]></item>
-		<item name="calendar.event.date.participation.message.description"><![CDATA[İsteğe bağlı olarak, katılımcılar listesinde gösterilecek bir yorum girebilirsiniz.]]></item>
-		<item name="calendar.event.date.participation.notChangeable"><![CDATA[Bu etkinlikte kararınızı değiştirmenize izin verilmiyor.]]></item>
-		<item name="calendar.event.date.participation.notification.mail.html"><![CDATA[<p>{@$authorList} şimdi <a href="{$eventDate->getLink()}">{$eventDate->getTitle()}</a> etkinliğine {if $count == 1 && $guestTimesTriggered < 2 && (!$event->getAuthor()->userID || $guestTimesTriggered == 0)}katılıyor{else}katılıyorlar{/if} ({@$eventDate->getFormattedTimeFrame()}):</p>]]></item>
-		<item name="calendar.event.date.participation.notification.mail.plaintext"><![CDATA[{@$authorList} şimdi “{@$eventDate->getTitle()}” etkinliğine {if $count == 1 && $guestTimesTriggered < 2 && (!$event->getAuthor()->userID || $guestTimesTriggered == 0)}katılıyor{else}katılıyorlar{/if} [URL:{@$eventDate->getLink()}] ({@$eventDate->getFormattedTimeFrame()}){if $count == 1 && !$guestTimesTriggered}:{else}.{/if}]]></item>
-		<item name="calendar.event.date.participation.notification.message"><![CDATA[<strong>{$author}</strong>, şimdi <strong>{$eventDate->getTitle()}</strong> etkinliğine katılıyor ({$eventDate->getFormattedTimeFrame()}).]]></item>
-		<item name="calendar.event.date.participation.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language}, şimdi <strong>{$eventDate->getTitle()}</strong> etkinliğine katılıyor ({$eventDate->getFormattedTimeFrame()}).]]></item>
+		<item name="calendar.event.date.participation.message.description"><![CDATA[İsteğe bağlı olarak, katılımcı listesinde görüntülenecek bir yorum yazabilirsiniz.]]></item>
+		<item name="calendar.event.date.participation.notChangeable"><![CDATA[Bu etkinlik kararınızı değiştirmenize izin vermiyor.]]></item>
+		<item name="calendar.event.date.participation.notification.mail.html"><![CDATA[<p>{@$authorList} artık <a href="{$eventDate->getLink()}">{$eventDate->getTitle()}</a> etkinliğine ({@$eventDate->getFormattedTimeFrame()}) {if $count == 1 && $guestTimesTriggered < 2 && (!$event->getAuthor()->userID || $guestTimesTriggered == 0)}katılıyor{else}katılıyorlar{/if}:</p>]]></item>
+		<item name="calendar.event.date.participation.notification.mail.plaintext"><![CDATA[{@$authorList} artık “{@$eventDate->getTitle()}” etkinliğine [URL:{@$eventDate->getLink()}] ({@$eventDate->getFormattedTimeFrame()}) {if $count == 1 && $guestTimesTriggered < 2 && (!$event->getAuthor()->userID || $guestTimesTriggered == 0)}katılıyor{else}katılıyorlar{/if}{if $count == 1 && !$guestTimesTriggered}:{else}.{/if}]]></item>
+		<item name="calendar.event.date.participation.notification.message"><![CDATA[<strong>{$author}</strong> artık <strong>{$eventDate->getTitle()}</strong> etkinliğine ({$eventDate->getFormattedTimeFrame()}) katılıyor.]]></item>
+		<item name="calendar.event.date.participation.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language} artık <strong>{$eventDate->getTitle()}</strong> etkinliğine ({$eventDate->getFormattedTimeFrame()}) katılıyor.]]></item>
 		<item name="calendar.event.date.participation.notification.title"><![CDATA[Yeni Katılımcı]]></item>
-		<item name="calendar.event.date.participation.notification.title.stacked"><![CDATA[{#$count} yeni Katılımcı]]></item>
+		<item name="calendar.event.date.participation.notification.title.stacked"><![CDATA[{#$count} yeni katılımcı]]></item>
 		<item name="calendar.event.date.participation.participate"><![CDATA[Katıl]]></item>
 		<item name="calendar.event.date.participation.removeParticipant"><![CDATA[Katılımcıyı Kaldır]]></item>
-		<item name="calendar.event.date.participation.removeParticipant.confirmMessage"><![CDATA[Gerçekten <span class="confirmationObject">{$participant->username}</span>’ı bu etkinlikten kaldırmak istiyor musunuz?]]></item>
+		<item name="calendar.event.date.participation.removeParticipant.confirmMessage"><![CDATA[<span class="confirmationObject">{$participant->username}</span> adlı kullanıcıyı bu etkinlikten kaldırmak istediğinizden emin misiniz?]]></item>
 		<item name="calendar.event.date.participation.user"><![CDATA[Katılımcılar]]></item>
-		<item name="calendar.event.date.participation.user.description"><![CDATA[Ek kullanıcıları kullanıcı adlarını belirterek ve aşağıdaki seçeneklerden birini seçerek ekleyebilirsiniz.]]></item>
+		<item name="calendar.event.date.participation.user.description"><![CDATA[Kullanıcı adını belirterek ve aşağıdan bir seçenek seçerek ek kullanıcılar ekleyebilirsiniz.]]></item>
 		<item name="calendar.event.date.participation.user.error.alreadyParticipating"><![CDATA[“{$participant->username}” zaten katılmaya karar verdi.]]></item>
 		<item name="calendar.event.date.previous"><![CDATA[Önceki Tekrar]]></item>
+		<item name="calendar.event.date.repeat"><![CDATA[Tekrar]]></item>
 		<item name="calendar.event.date.repeat.byDay"><![CDATA[Haftanın Günü]]></item>
 		<item name="calendar.event.date.repeat.byMonthDay"><![CDATA[Ayın Günü]]></item>
-		<item name="calendar.event.date.repeat.dayOffset.first"><![CDATA[İlk]]></item>
+		<item name="calendar.event.date.repeat.dayOffset"><![CDATA[Şu sırada]]></item>
+		<item name="calendar.event.date.repeat.dayOffset.first"><![CDATA[Birinci]]></item>
 		<item name="calendar.event.date.repeat.dayOffset.fourth"><![CDATA[Dördüncü]]></item>
-		<item name="calendar.event.date.repeat.dayOffset.last"><![CDATA[En Son]]></item>
+		<item name="calendar.event.date.repeat.dayOffset.last"><![CDATA[Son]]></item>
 		<item name="calendar.event.date.repeat.dayOffset.second"><![CDATA[İkinci]]></item>
 		<item name="calendar.event.date.repeat.dayOffset.third"><![CDATA[Üçüncü]]></item>
-		<item name="calendar.event.date.repeat.description"><![CDATA[Bir desene göre bu etkinliği tekrarlayın.]]></item>
+		<item name="calendar.event.date.repeat.description"><![CDATA[Bu etkinliği bir desene göre tekrarla.]]></item>
 		<item name="calendar.event.date.repeat.enable"><![CDATA[Tekrarı Etkinleştir]]></item>
 		<item name="calendar.event.date.repeat.end.count"><![CDATA[Tekrar Sayısı]]></item>
 		<item name="calendar.event.date.repeat.end.date"><![CDATA[Tarih]]></item>
-		<item name="calendar.event.date.repeat.end.date.error.invalid"><![CDATA[Girdiğiniz bitiş tarihi geçersiz. Başlangıç tarihinden sonra olmalıdır.]]></item>
+		<item name="calendar.event.date.repeat.end.date.error.invalid"><![CDATA[Girilen bitiş tarihi geçersiz. Başlangıç tarihinden sonra olmalıdır.]]></item>
 		<item name="calendar.event.date.repeat.end.type"><![CDATA[Tekrar Bitişi]]></item>
 		<item name="calendar.event.date.repeat.end.type.count"><![CDATA[Tekrar sayısı]]></item>
 		<item name="calendar.event.date.repeat.end.type.date"><![CDATA[Tarih]]></item>
 		<item name="calendar.event.date.repeat.end.type.unlimited"><![CDATA[Asla]]></item>
 		<item name="calendar.event.date.repeat.interval"><![CDATA[Aralık]]></item>
-		<item name="calendar.event.date.repeat.interval.daily.description"><![CDATA[Her gün tekrarlayın]]></item>
-		<item name="calendar.event.date.repeat.interval.monthly.description"><![CDATA[Ayda bir tekrarlayın]]></item>
-		<item name="calendar.event.date.repeat.interval.weekly.description"><![CDATA[Haftada bir tekrarlayın]]></item>
-		<item name="calendar.event.date.repeat.interval.yearly.description"><![CDATA[Yılda bir tekrarlayın]]></item>
+		<item name="calendar.event.date.repeat.interval.daily.description"><![CDATA[Her gün tekrarla.]]></item>
+		<item name="calendar.event.date.repeat.interval.monthly.description"><![CDATA[Her ay tekrarla.]]></item>
+		<item name="calendar.event.date.repeat.interval.weekly.description"><![CDATA[Her hafta tekrarla.]]></item>
+		<item name="calendar.event.date.repeat.interval.yearly.description"><![CDATA[Her yıl tekrarla.]]></item>
 		<item name="calendar.event.date.repeat.type"><![CDATA[Tür]]></item>
 		<item name="calendar.event.date.repeat.type.daily"><![CDATA[Günlük]]></item>
 		<item name="calendar.event.date.repeat.type.monthlyByDayOfMonth"><![CDATA[Aylık (ayın günü)]]></item>
@@ -188,111 +191,110 @@
 		<item name="calendar.event.date.repeat.type.weekly"><![CDATA[Haftalık]]></item>
 		<item name="calendar.event.date.repeat.type.yearlyByDayOfMonth"><![CDATA[Yıllık (ayın günü)]]></item>
 		<item name="calendar.event.date.repeat.type.yearlyByDayOfWeek"><![CDATA[Yıllık (haftanın günü)]]></item>
-		<item name="calendar.event.date.showAll"><![CDATA[Tüm Etkinlikleri Göster]]></item>
+		<item name="calendar.event.date.showAll"><![CDATA[[Tüm Etkinlikleri Göster]]]></item>
 		<item name="calendar.event.date.start"><![CDATA[Başlangıç]]></item>
 		<item name="calendar.event.date.start.error.invalid"><![CDATA[Girilen başlangıç tarihi geçersiz.]]></item>
 		<item name="calendar.event.date.start.error.startsBeforePreviousEventDate"><![CDATA[Bu etkinliğin tekrarı, önceki tekrarın bitişinden önce başlayamaz.]]></item>
 		<item name="calendar.event.date.start.local"><![CDATA[Başlangıç (Yerel Saat)]]></item>
-		<item name="calendar.event.date.timezone"><![CDATA[Zaman Dilimi]]></item>
+		<item name="calendar.event.date.timezone"><![CDATA[Saat Dilimi]]></item>
 		<item name="calendar.event.day.count"><![CDATA[{#$eventCount} etkinlik{if $eventCount != 1}ler{/if}]]></item>
 		<item name="calendar.event.delete"><![CDATA[Sil]]></item>
-		<item name="calendar.event.delete.confirmMessage"><![CDATA[Bu etkinliği ve tüm tekrarlarını gerçekten silmek istiyor musunuz?]]></item>
+		<item name="calendar.event.delete.confirmMessage"><![CDATA[Bu etkinliği ve tüm tekrarlarını silmek istediğinizden emin misiniz?]]></item>
 		<item name="calendar.event.disable"><![CDATA[Devre Dışı Bırak]]></item>
 		<item name="calendar.event.edit"><![CDATA[Etkinliği Düzenle]]></item>
 		<item name="calendar.event.enable"><![CDATA[Onayla]]></item>
 		<item name="calendar.event.enableComments"><![CDATA[Yorumları Etkinleştir]]></item>
-		<item name="calendar.event.enableComments.description"><![CDATA[Kullanıcıların bu etkinliğe yorum yapmasına izin verir.]]></item>
-		<item name="calendar.event.eventComments"><![CDATA[{@$eventDate->comments|shortUnit} Yorum]]></item>
-		<item name="calendar.event.eventParticipations"><![CDATA[Etkinlik Katılımı]]></item>
+		<item name="calendar.event.enableComments.description"><![CDATA[Kullanıcıların bu etkinlik için yorum yapmasına izin verir.]]></item>
+		<item name="calendar.event.eventComments"><![CDATA[{@$eventDate->comments|shortUnit} Yorum{if $eventDate->comments != 1}lar{/if}]]></item>
 		<item name="calendar.event.eventParticipations.decision.invited"><![CDATA[Davet Edildi]]></item>
 		<item name="calendar.event.eventParticipations.decision.maybe"><![CDATA[Kararsız]]></item>
 		<item name="calendar.event.eventParticipations.decision.no"><![CDATA[İptal Edildi]]></item>
 		<item name="calendar.event.eventParticipations.decision.yes"><![CDATA[Katılıyor]]></item>
-		<item name="calendar.event.eventViews"><![CDATA[{@$event->views|shortUnit} Görüntüleme]]></item>
+		<item name="calendar.event.eventViews"><![CDATA[{@$event->views|shortUnit} Görüntüleme{if $event->views != 1}ler{/if}]]></item>
 		<item name="calendar.event.events"><![CDATA[Etkinlikler]]></item>
-		<item name="calendar.event.eventsInfoWindow"><![CDATA[Çoklu Etkinlik]]></item>
-		<item name="calendar.event.featured"><![CDATA[Öne Çıkar]]></item>
+		<item name="calendar.event.eventsInfoWindow"><![CDATA[Birden Fazla Etkinlik]]></item>
+		<item name="calendar.event.featured"><![CDATA[Öne Çıkan]]></item>
 		<item name="calendar.event.generalInformation"><![CDATA[Genel]]></item>
 		<item name="calendar.event.import"><![CDATA[Etkinlikleri İçe Aktar]]></item>
-		<item name="calendar.event.import.description"><![CDATA[vCalendar veya iCalendar değişim formatını kullanarak etkinliklerin içe aktarımını destekler.]]></item>
-		<item name="calendar.event.import.importURL"><![CDATA[Dosya İndir (URL)]]></item>
+		<item name="calendar.event.import.description"><![CDATA[vCalendar veya iCalendar değişim biçimini kullanarak etkinlik içe aktarmayı destekler.]]></item>
+		<item name="calendar.event.import.importURL"><![CDATA[Dosyayı İndir (URL)]]></item>
 		<item name="calendar.event.import.importURL.error.downloadFailed"><![CDATA[İndirme sırasında bilinmeyen bir hata oluştu.]]></item>
-		<item name="calendar.event.import.success"><![CDATA[{#$success} etkinlik {if $success != 1}ler{/if} {if $success == 1}başarıyla{else}başarıyla{/if} içe aktarıldı.]]></item>
+		<item name="calendar.event.import.success"><![CDATA[{#$success} etkinlik{if $success != 1}ler{/if} {if $success == 1}içe aktarıldı{else}içe aktarıldı{/if}.]]></item>
 		<item name="calendar.event.import.upload"><![CDATA[Dosya Yükle]]></item>
 		<item name="calendar.event.import.upload.error.uploadFailed"><![CDATA[Yükleme sırasında bilinmeyen bir hata oluştu.]]></item>
 		<item name="calendar.event.information"><![CDATA[Detaylar]]></item>
 		<item name="calendar.event.invitedParticipants"><![CDATA[Davet Edilen Katılımcılar]]></item>
 		<item name="calendar.event.invitedParticipants.description"><![CDATA[Bu kullanıcılar davet edildi:]]></item>
-		<item name="calendar.event.like.notification.message"><![CDATA[<strong>{$author}</strong>, <strong>{$event->getTitle()}</strong> etkinliğinize tepki verdi ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}).]]></item>
-		<item name="calendar.event.like.notification.message.stacked"><![CDATA[{@'wcf.user.notification.stacked.authorList'|language} etkinliğinize <strong>{$event->getTitle()}</strong> ({@$__wcf->getReactionHandler()->renderInlineList($reactions)}).]]></item>
+		<item name="calendar.event.like.notification.message"><![CDATA[<strong>{$author}</strong>, etkinliğinize <strong>{$event->getTitle()}</strong> {unsafe:$reaction->renderIcon()} ile tepki verdi.]]></item>
+		<item name="calendar.event.like.notification.message.stacked"><![CDATA[{unsafe:$authorList}, etkinliğinize <strong>{$event->getTitle()}</strong> {if $reaction}{unsafe:$reaction->renderIcon()} ile{/if} tepki verdi.]]></item>
 		<item name="calendar.event.like.notification.title"><![CDATA[Etkinliğinize Tepki]]></item>
 		<item name="calendar.event.like.notification.title.stacked"><![CDATA[{#$count} kullanıcı etkinliğinize tepki verdi]]></item>
-		<item name="calendar.event.log.trash.summary"><![CDATA[Etkinlik, {if $userID}<a href="{link controller='User' id=$userID title=$username}{/link}" class="userLink" data-user-id="{@$userID}">{$username}</a>{else}{$username}{/if}{if $additionalData[reason]} aşağıdaki nedenle silindi: {$additionalData[reason]}{/if}. ({@$time|time})]]></item>
+		<item name="calendar.event.log.trash.summary"><![CDATA[Etkinlik, {if $userID}<a href="{link controller='User' id=$userID title=$username}{/link}" class="userLink" data-object-id="{$userID}">{$username}</a>{else}{$username}{/if} tarafından silindi{if $additionalData[reason]}. Sebep: {$additionalData[reason]}{/if}. ({@$time|time})]]></item>
 		<item name="calendar.event.map"><![CDATA[Konum]]></item>
 		<item name="calendar.event.message"><![CDATA[Açıklama]]></item>
-		<item name="calendar.event.moderation.info"><![CDATA[Yeni oluşturulan etkinlikler, moderatör tarafından onaylanana kadar erişilemez kalacaktır.]]></item>
+		<item name="calendar.event.moderation.info"><![CDATA[Yeni oluşturulan etkinlikler, bir moderatör tarafından onaylanana kadar erişilemez olacaktır.]]></item>
 		<item name="calendar.event.moderation.redirect"><![CDATA[Etkinliğiniz oluşturuldu ve onaylandıktan sonra görüntülenecektir.]]></item>
-		<item name="calendar.event.monthlyView"><![CDATA[Ay Görünümü]]></item>
-		<item name="calendar.event.noParticipants"><![CDATA[Katılımcı Yok]]></item>
-		<item name="calendar.event.noParticipants.description"><![CDATA[Bu kullanıcılar kesinlikle katılmıyor:]]></item>
-		<item name="calendar.event.notification.mail.html"><![CDATA[<p><strong>{$author}</strong>, <a href="{$eventDate->getLink()}">{$eventDate->getTitle()}</a> etkinliğini ({$eventDate->getFormattedTimeFrame()}) oluşturdu:</p>]]></item>
-		<item name="calendar.event.notification.mail.plaintext"><![CDATA[{@$author} “{@$eventDate->getTitle()}” etkinliğini ({$eventDate->getFormattedTimeFrame()}) oluşturdu [URL:{@$eventDate->getLink()}]:]]></item>
-		<item name="calendar.event.notification.message"><![CDATA[<strong>{$author}</strong>, <strong>{$event->subject}</strong> etkinliğini ({$event->getFirstEventDate()->getFormattedTimeFrame()}) oluşturdu.]]></item>
+		<item name="calendar.event.monthlyView"><![CDATA[Aylık Görünüm]]></item>
+		<item name="calendar.event.noParticipants"><![CDATA[Katılmayanlar]]></item>
+		<item name="calendar.event.noParticipants.description"><![CDATA[Bu kullanıcılar kesin olarak katılmıyor:]]></item>
+		<item name="calendar.event.notification.mail.html"><![CDATA[<p><strong>{$author}</strong>, <a href="{$eventDate->getLink()}">{$eventDate->getTitle()}</a> etkinliğini oluşturdu ({$eventDate->getFormattedTimeFrame()}):</p>]]></item>
+		<item name="calendar.event.notification.mail.plaintext"><![CDATA[{@$author}, “{@$eventDate->getTitle()}” etkinliğini oluşturdu ({$eventDate->getFormattedTimeFrame()}) [URL:{@$eventDate->getLink()}]:]]></item>
+		<item name="calendar.event.notification.message"><![CDATA[<strong>{$author}</strong>, <strong>{$event->subject}</strong> etkinliğini oluşturdu ({$event->getFirstEventDate()->getFormattedTimeFrame()}).]]></item>
 		<item name="calendar.event.notification.title"><![CDATA[Yeni Etkinlik]]></item>
 		<item name="calendar.event.options"><![CDATA[Ek Bilgiler]]></item>
 		<item name="calendar.event.participant.count"><![CDATA[{#$participants} Kişi]]></item>
 		<item name="calendar.event.participants"><![CDATA[Katılımcılar]]></item>
-		<item name="calendar.event.participants.description"><![CDATA[Bu kullanıcılar katılımını onayladı:]]></item>
+		<item name="calendar.event.participants.description"><![CDATA[Bu kullanıcılar katılımlarını onayladı:]]></item>
 		<item name="calendar.event.participation"><![CDATA[Katılım]]></item>
 		<item name="calendar.event.participation.description"><![CDATA[Kullanıcıların bu etkinliğe katılmasına izin verir.]]></item>
 		<item name="calendar.event.participation.enable"><![CDATA[Katılımı Etkinleştir]]></item>
-		<item name="calendar.event.participation.endTime"><![CDATA[Bitiş Tarihi]]></item>
-		<item name="calendar.event.participation.endTime.expired"><![CDATA[Bu etkinliğin bitiş tarihi geçmiştir.]]></item>
-		<item name="calendar.event.participation.endTime.info"><![CDATA[{if $eventDate->getParticipationEndTime() > TIME_NOW}Bitiş tarihi: {$eventDate->getParticipationEndTime()|dateDiff}{else}Bitiş tarihi geçti{/if}]]></item>
-		<item name="calendar.event.participation.endTime.value"><![CDATA[{@$eventDate->getParticipationEndTime()|plainTime}{if $eventDate->getParticipationEndTime() < TIME_NOW}<br>(Süresi Doldu){/if}]]></item>
+		<item name="calendar.event.participation.endTime"><![CDATA[Kapanış Tarihi]]></item>
+		<item name="calendar.event.participation.endTime.expired"><![CDATA[Bu etkinlik için son katılım tarihi geçmiştir.]]></item>
+		<item name="calendar.event.participation.endTime.info"><![CDATA[{if $eventDate->getParticipationEndTime() > TIME_NOW}Son katılım tarihi: {$eventDate->getParticipationEndTime()|dateDiff}{else}Son katılım tarihi geçmiştir{/if}]]></item>
+		<item name="calendar.event.participation.endTime.value"><![CDATA[{@$eventDate->getParticipationEndTime()|plainTime}{if $eventDate->getParticipationEndTime() < TIME_NOW}<br>(Süresi doldu){/if}]]></item>
 		<item name="calendar.event.participation.inviteOnly"><![CDATA[Sadece Davetliler]]></item>
-		<item name="calendar.event.participation.inviteOnly.description"><![CDATA[Bu etkinliğe sadece davet edilen kullanıcılar katılabilir.]]></item>
-		<item name="calendar.event.participation.isChangeable"><![CDATA[Katılımcılar kararlarını değiştirebilir]]></item>
+		<item name="calendar.event.participation.inviteOnly.description"><![CDATA[Bu etkinliğe yalnızca davet edilen kullanıcılar katılabilir.]]></item>
+		<item name="calendar.event.participation.isChangeable"><![CDATA[Katılımcılar Kararlarını Değiştirebilir]]></item>
 		<item name="calendar.event.participation.isChangeable.description"><![CDATA[Katılımcılar istedikleri zaman kararlarını değiştirebilir.]]></item>
-		<item name="calendar.event.participation.isPublic"><![CDATA[Katılımcılar listesi herkese açık]]></item>
+		<item name="calendar.event.participation.isPublic"><![CDATA[Herkese Açık Katılımcı Listesi]]></item>
 		<item name="calendar.event.participation.isPublic.description"><![CDATA[Katılımcı listesi herkes tarafından görülebilir.]]></item>
-		<item name="calendar.event.participation.maxCompanions"><![CDATA[Maksimum Arkadaş]]></item>
-		<item name="calendar.event.participation.maxCompanions.description"><![CDATA[Katılımcı başına izin verilen maksimum arkadaş sayısı.]]></item>
+		<item name="calendar.event.participation.maxCompanions"><![CDATA[Maksimum Refakatçi]]></item>
+		<item name="calendar.event.participation.maxCompanions.description"><![CDATA[Katılımcı başına izin verilen en fazla refakatçi sayısı.]]></item>
 		<item name="calendar.event.participation.maxParticipants"><![CDATA[Maksimum Katılımcı]]></item>
-		<item name="calendar.event.participation.maxParticipants.description"><![CDATA[Maksimum katılımcı sayısı. Sonsuz için 0 kullanın.]]></item>
-		<item name="calendar.event.participation.maxParticipants.info"><![CDATA[Sadece {$eventDate->getEvent()->maxParticipants - $eventDate->participants} koltuk kaldı]]></item>
+		<item name="calendar.event.participation.maxParticipants.description"><![CDATA[Maksimum katılımcı sayısı. Sınırsız için 0 kullanın.]]></item>
+		<item name="calendar.event.participation.maxParticipants.info"><![CDATA[Yalnızca {$eventDate->getEvent()->maxParticipants - $eventDate->participants} yer kaldı]]></item>
 		<item name="calendar.event.pastEvents"><![CDATA[Geçmiş Etkinlikler]]></item>
-		<item name="calendar.event.preset"><![CDATA[Etkinlik <a href="{link application='calendar' controller='Event' object=$presetEvent->getFirstEventDate()}{/link}">{$presetEvent->getTitle()}</a> şablon olarak kullanılıyor, aşağıdaki alanlar önceden doldurulmuştur.]]></item>
-		<item name="calendar.event.recentActivity.event"><![CDATA[<strong>{$author}</strong>, {if $event->hasLabels()}<ul class="labelList">{foreach from=$event->getLabels() item=label}<li>{unsafe:$label->render()}</li>{/foreach}</ul> {/if}<strong>{$event->getTitle()} ({$event->getFirstEventDate()->getFormattedTimeFrame()})</strong> adlı etkinliği oluşturdu.]]></item>
-		<item name="calendar.event.recentActivity.eventDateComment"><![CDATA[<strong>{$author}</strong>, {if $eventDate->getEvent()->hasLabels()}<ul class="labelList">{foreach from=$eventDate->getEvent()->getLabels() item=label}<li>{unsafe:$label->render()}</li>{/foreach}</ul> {/if}<strong>{$eventDate->getTitle()}</strong> adlı etkinlik hakkında yorum yapıldı.]]></item>
-		<item name="calendar.event.recentActivity.eventDateCommentResponse"><![CDATA[<strong>{$author}</strong>, {if $eventDate->getEvent()->hasLabels()}<ul class="labelList">{foreach from=$eventDate->getEvent()->getLabels() item=label}<li>{unsafe:$label->render()}</li>{/foreach}</ul> {/if}<strong>{$eventDate->getTitle()}</strong> adlı etkinlikteki, <strong>{$commentAuthor}</strong> adlı kullanıcının yorumuna yanıt verildi.]]></item>
-		<item name="calendar.event.recentActivity.likedEvent"><![CDATA[<strong>{$author}</strong>, {if $event->hasLabels()}<ul class="labelList">{foreach from=$event->getLabels() item=label}<li>{unsafe:$label->render()}</li>{/foreach}</ul> {/if}<strong>{$event->getTitle()}</strong> adlı etkinliğe <span title="{$reactionType->getTitle()}" class="jsTooltip">{unsafe:$reactionType->renderIcon()}</span> ile tepki verildi.]]></item>
+		<item name="calendar.event.preset"><![CDATA[<a href="{link application='calendar' controller='Event' object=$presetEvent->getFirstEventDate()}{/link}">{$presetEvent->getTitle()}</a> etkinliği şablon olarak kullanılmaktadır, aşağıdaki alanlar önceden doldurulmuştur.]]></item>
+		<item name="calendar.event.recentActivity.event"><![CDATA[<strong>{$author}</strong>, {if $event->hasLabels()}<ul class="labelList">{foreach from=$event->getLabels() item=label}<li>{unsafe:$label->render()}</li>{/foreach}</ul> {/if}<strong>{$event->getTitle()} ({$event->getFirstEventDate()->getFormattedTimeFrame()})</strong> etkinliğini oluşturdu.]]></item>
+		<item name="calendar.event.recentActivity.eventDateComment"><![CDATA[<strong>{$author}</strong>, {if $eventDate->getEvent()->hasLabels()}<ul class="labelList">{foreach from=$eventDate->getEvent()->getLabels() item=label}<li>{unsafe:$label->render()}</li>{/foreach}</ul> {/if}<strong>{$eventDate->getTitle()}</strong> etkinliğine yorum yaptı.]]></item>
+		<item name="calendar.event.recentActivity.eventDateCommentResponse"><![CDATA[<strong>{$author}</strong>, {if $eventDate->getEvent()->hasLabels()}<ul class="labelList">{foreach from=$eventDate->getEvent()->getLabels() item=label}<li>{unsafe:$label->render()}</li>{/foreach}</ul> {/if}<strong>{$eventDate->getTitle()}</strong> etkinliğinde <strong>{$commentAuthor}</strong> tarafından yapılan yoruma yanıt verdi.]]></item>
+		<item name="calendar.event.recentActivity.likedEvent"><![CDATA[<strong>{$author}</strong>, {unsafe:$reactionType->renderIcon()} ile {if $event->hasLabels()}<ul class="labelList">{foreach from=$event->getLabels() item=label}<li>{unsafe:$label->render()}</li>{/foreach}</ul> {/if}<strong>{$event->getTitle()}</strong> etkinliğine tepki verdi.]]></item>
 		<item name="calendar.event.restore"><![CDATA[Geri Yükle]]></item>
 		<item name="calendar.event.searchEvents"><![CDATA[Etkinlikleri Ara]]></item>
-		<item name="calendar.event.setAsFeatured"><![CDATA[Öne Çıkar]]></item>
+		<item name="calendar.event.setAsFeatured"><![CDATA[Öne Çıkan Olarak İşaretle]]></item>
 		<item name="calendar.event.sortField.comments"><![CDATA[Yorumlar]]></item>
 		<item name="calendar.event.sortField.cumulativeLikes"><![CDATA[Tepkiler]]></item>
 		<item name="calendar.event.sortField.startTime"><![CDATA[Tarih]]></item>
 		<item name="calendar.event.sortField.subject"><![CDATA[Başlık]]></item>
-		<item name="calendar.event.sortField.views"><![CDATA[Görüntülemeler]]></item>
+		<item name="calendar.event.sortField.views"><![CDATA[Görüntüleme]]></item>
 		<item name="calendar.event.trash"><![CDATA[Çöp Kutusuna Taşı]]></item>
-		<item name="calendar.event.trash.confirmMessage"><![CDATA[Bu etkinliği ve tüm tekrarlarını gerçekten çöp kutusuna taşımak istiyor musunuz?]]></item>
+		<item name="calendar.event.trash.confirmMessage"><![CDATA[Bu etkinliği ve tüm tekrarlarını çöp kutusuna taşımak istediğinize emin misiniz?]]></item>
 		<item name="calendar.event.trash.reason"><![CDATA[Neden (isteğe bağlı)]]></item>
 		<item name="calendar.event.undecidedParticipants"><![CDATA[Kararsız Katılımcılar]]></item>
-		<item name="calendar.event.undecidedParticipants.description"><![CDATA[Bu kullanıcılar henüz kesin bir karar vermediler:]]></item>
-		<item name="calendar.event.unsetAsFeatured"><![CDATA[Öne Çıkarma İşaretini Kaldır]]></item>
-		<item name="calendar.event.upcomingEvents"><![CDATA[Yaklaşan Etkinlikler]]></item>
+		<item name="calendar.event.undecidedParticipants.description"><![CDATA[Bu kullanıcılar henüz kesin bir karar vermedi:]]></item>
+		<item name="calendar.event.unsetAsFeatured"><![CDATA[Öne Çıkan İşaretini Kaldır]]></item>
+		<item name="calendar.event.upcomingEvents"><![CDATA[Gelecek Etkinlikler]]></item>
 		<item name="calendar.event.useAsPreset"><![CDATA[Şablon Olarak Kullan]]></item>
-		<item name="calendar.event.userEvents"><![CDATA[{$user->username} Tarafından Oluşturulan Etkinlikler]]></item>
-		<item name="calendar.event.weeklyView"><![CDATA[Hafta Görünümü]]></item>
-		<item name="calendar.event.yearlyView"><![CDATA[Yıl Görünümü]]></item>
+		<item name="calendar.event.userEvents"><![CDATA[{$user->username} tarafından oluşturulan etkinlikler]]></item>
+		<item name="calendar.event.weeklyView"><![CDATA[Haftalık Görünüm]]></item>
+		<item name="calendar.event.yearlyView"><![CDATA[Yıllık Görünüm]]></item>
 	</category>
 	<category name="calendar.index">
-		<item name="calendar.index.stats"><![CDATA[İstatistikler]]></item>
-		<item name="calendar.index.stats.detail"><![CDATA[<ul class="inlineList dotSeparated">
-<li>{#$stats[authors]} Yazar{if $stats[authors] != 1}lar{/if}</li>
-<li>{#$stats[events]} Etkinlik{if $stats[events] != 1}ler{/if} ({#$stats[eventsPerDay]} Etkinlik{if $stats[eventsPerDay] != 1}s{/if} Günde)</li>
-<li>{#$stats[comments]} Yorum{if $stats[comments] != 1}lar{/if}</li>
+	<item name="calendar.index.stats"><![CDATA[İstatistikler]]></item>
+	<item name="calendar.index.stats.detail"><![CDATA[<ul class="inlineList dotSeparated">
+<li>{plural value=$calendarStats->authors one='1 Yazar' other='# Yazar'}</li>
+<li>{plural value=$calendarStats->events one='1 Etkinlik' other='# Etkinlik'} (Günlük {plural value=$calendarStats->eventsPerDay one='1 Etkinlik' other='# Etkinlik'})</li>
+<li>{plural value=$calendarStats->comments one='1 Yorum' other='# Yorum'}</li>
 </ul>]]></item>
 	</category>
 	<category name="wcf.acl.option">
@@ -311,9 +313,9 @@
 		<item name="wcf.acp.content.provider.com.woltlab.calendar.eventDateParticipation"><![CDATA[Etkinlik Katılımları]]></item>
 	</category>
 	<category name="wcf.acp.cronjob">
-		<item name="wcf.acp.cronjob.description.cronjob29"><![CDATA[Etkinlik geri dönüşüm kutusunu boşaltır]]></item>
-		<item name="wcf.acp.cronjob.description.cronjob30"><![CDATA[Takvim etkinlik bildirimleri gönderir]]></item>
-		<item name="wcf.acp.cronjob.description.cronjob31"><![CDATA[Takvim etkinliklerini içe aktarır]]></item>
+		<item name="wcf.acp.cronjob.description.cronjob32"><![CDATA[Etkinlik geri dönüşüm kutusunu boşaltır]]></item>
+		<item name="wcf.acp.cronjob.description.cronjob33"><![CDATA[Takvim etkinliği bildirimlerini gönderir]]></item>
+		<item name="wcf.acp.cronjob.description.cronjob34"><![CDATA[Takvim etkinliklerini içe aktarır]]></item>
 	</category>
 	<category name="wcf.acp.dataImport">
 		<item name="wcf.acp.dataImport.data.com.woltlab.calendar.category"><![CDATA[Etkinlik kategorileri]]></item>
@@ -442,7 +444,6 @@
 	<category name="wcf.user">
 		<item name="wcf.user.activityPoint.objectType.com.woltlab.calendar.activityPointEvent.event"><![CDATA[Etkinlikler]]></item>
 		<item name="wcf.user.boxList.description.calendarEvents"><![CDATA[{#$boxUser->calendarEvents} Etkinlik{if $boxUser->calendarEvents != 1}ler{/if}]]></item>
-		<item name="wcf.user.sortField.calendarEvents"><![CDATA[Etkinlikler]]></item>
 	</category>
 	<category name="wcf.user.condition">
 		<item name="wcf.user.condition.calendarEvents"><![CDATA[Etkinlikler]]></item>
